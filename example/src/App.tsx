@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-zaptric-ui';
+import { Button, multiply } from 'react-native-zaptric-ui';
 
 export default function App() {
   const [result, setResult] = useState<number | undefined>();
@@ -12,6 +12,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <Button
+        title="Next"
+        btnWidth={200}
+        
+        onPress={() => {
+          console.log('Working');
+        }}
+      />
     </View>
   );
 }

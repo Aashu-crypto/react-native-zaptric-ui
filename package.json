@@ -1,19 +1,19 @@
 {
   "name": "react-native-zaptric-ui",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "This is UI library for Zaptric",
-  "source": "./src/index.tsx",
+  "source": "./src\\index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
   "exports": {
     ".": {
       "import": {
-        "types": "./lib/typescript/module/src/index.d.ts",
-        "default": "./lib/module/index.js"
+        "types": "./lib\\typescript\\module\\src\\index.d.ts",
+        "default": "./lib\\module\\index.js"
       },
       "require": {
-        "types": "./lib/typescript/commonjs/src/index.d.ts",
-        "default": "./lib/commonjs/index.js"
+        "types": "./lib\\typescript\\commonjs\\src\\index.d.ts",
+        "default": "./lib\\commonjs\\index.js"
       }
     }
   },
@@ -79,6 +79,7 @@
     "react": "18.2.0",
     "react-native": "0.74.5",
     "react-native-builder-bob": "^0.30.2",
+    "react-native-reanimated": "^3.15.4",
     "release-it": "^15.0.0",
     "typescript": "^5.2.2"
   },
@@ -87,7 +88,11 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-reanimated": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "react-native-reanimated": "^3.0.0"
   },
   "workspaces": [
     "example"
@@ -172,7 +177,6 @@
       [
         "typescript",
         {
-          "project": "tsconfig.build.json",
           "esm": true
         }
       ]
@@ -181,5 +185,10 @@
   "create-react-native-library": {
     "type": "library",
     "version": "0.41.2"
+  },
+  "types": "./lib\\typescript\\commonjs\\src\\index.d.ts",
+  "dependencies": {
+    "expo-linear-gradient": "^13.0.2"
+
   }
 }
