@@ -10,7 +10,6 @@ npm install react-native-zaptric-ui
 
 ## Usage
 
-
 ```js
 import { multiply } from 'react-native-zaptric-ui';
 
@@ -18,7 +17,6 @@ import { multiply } from 'react-native-zaptric-ui';
 
 const result = await multiply(3, 7);
 ```
-
 
 ## Contributing
 

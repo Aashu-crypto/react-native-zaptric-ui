@@ -189,6 +189,5 @@
   "types": "./lib\\typescript\\commonjs\\src\\index.d.ts",
   "dependencies": {
     "expo-linear-gradient": "^13.0.2"
-
   }
 }

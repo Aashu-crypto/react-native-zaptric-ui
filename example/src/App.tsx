@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Button, multiply } from 'react-native-zaptric-ui';
+import { Button, multiply, Slider } from 'react-native-zaptric-ui';
 
 export default function App() {
   const [result, setResult] = useState<number | undefined>();
@@ -20,6 +20,7 @@ export default function App() {
           console.log('Working');
         }}
       />
+      <Slider/>
     </View>
   );
 }

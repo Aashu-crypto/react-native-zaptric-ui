@@ -9,7 +9,6 @@ const defaultTheme = {
   },
 };
 
-
 const ThemeContext = createContext(defaultTheme);
 
 export const ThemeProvider = ({ children, theme = defaultTheme }) => {
