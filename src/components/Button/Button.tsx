@@ -43,8 +43,9 @@ const Button: React.FC<ButtonProps> = ({
   }));
 
   // Handle button press-in and press-out for scaling animation
+  
   const handlePressIn = () => {
-    scale.value = withSpring(0.95);
+    scale.value = withSpring(0.97);
   };
 
   const handlePressOut = () => {

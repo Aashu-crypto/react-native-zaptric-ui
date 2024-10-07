@@ -20,7 +20,7 @@ export default function App() {
           console.log('Working');
         }}
       />
-      <Slider/>
+     <Slider status={false} title='Online'/>
     </View>
   );
 }

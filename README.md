@@ -6,16 +6,37 @@ This is UI library for Zaptric
 
 ```sh
 npm install react-native-zaptric-ui
+Add react-native-reanimated/plugin plugin to your babel.config.js.
+
+
+```
+```js
+  module.exports = {
+    presets: [
+      ... // don't add it here :)
+    ],
+    plugins: [
+      ...
+      'react-native-reanimated/plugin',
+    ],
+  };
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-zaptric-ui';
+import { Button } from 'react-native-zaptric-ui';
 
 // ...
 
-const result = await multiply(3, 7);
+ <Button
+        title="Next"
+        btnWidth={200}
+        
+        onPress={() => {
+          console.log('Working');
+        }}
+      />
 ```
 
 ## Contributing
