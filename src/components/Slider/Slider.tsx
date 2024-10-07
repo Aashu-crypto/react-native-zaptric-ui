@@ -3,7 +3,7 @@ import React from 'react';
 import Animated from 'react-native-reanimated';
 
 type SliderProps = {
-  status: string;
+  status?: string;
 };
 const Slider: React.FC<SliderProps> = ({ status }) => {
 //   const isOn = useSharedValue(status === 'Online');
