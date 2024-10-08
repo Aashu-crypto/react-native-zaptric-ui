@@ -1,65 +1,82 @@
-import { Pressable, Text } from 'react-native';
+import { Text, View } from 'react-native';
 import React, { useEffect } from 'react';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  interpolateColor,
   withTiming,
-  interpolate
+  interpolateColor,
 } from 'react-native-reanimated';
-import styles from './Slider.styles';
+import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Color } from '../../context/GlobalStyles';
 
 type SliderProps = {
-  status?: boolean; 
- title?:string
+  status?: boolean;
+  title?: string;
+  btnWidth?: number;
 };
 
-const Slider: React.FC<SliderProps> = ({ status = false ,title}) => {
-  const isOn = useSharedValue(status ? 1 : 0); // Use number instead of boolean (0 for false, 1 for true)
-  const height = useSharedValue(0);
-  const width = useSharedValue(0);
+const Slider: React.FC<SliderProps> = ({ status = false, title, btnWidth = 300 }) => {
+  const isOn = useSharedValue(status ? 1 : 0);
+  const translateX = useSharedValue(0); // Value for tracking the thumb's position
+  const thumbWidth = 50; // Static thumb width
+  const trackWidth = btnWidth - thumbWidth; // Max width the thumb can move
+
   // Synchronize `isOn` with the `status` prop whenever it changes
   useEffect(() => {
     isOn.value = status ? withTiming(1, { duration: 400 }) : withTiming(0, { duration: 400 });
+    translateX.value = status ? trackWidth : 0;
   }, [status]);
 
-  // Animated style for the track color
-  const trackAnimatedStyle = useAnimatedStyle(() => {
-    const backgroundColor = interpolateColor(isOn.value, [0, 1], ['red', 'green']);
+  // Gesture handling for dragging the thumb
+  const gesture = Gesture.Pan()
+    .onUpdate((event) => {
+      // Update thumb position within bounds
+      translateX.value = Math.max(0, Math.min(trackWidth, event.translationX));
+    })
+    .onEnd(() => {
+      // On release, we keep the thumb at the last position without snapping
+      translateX.value = Math.max(0, Math.min(trackWidth, translateX.value));
+    });
+
+  // Style for the track color
+  const trackStyle = useAnimatedStyle(() => {
+    const backgroundColor = interpolateColor(isOn.value, [0, 1], [Color.backGroundColor, Color.appDefaultColor]); // Red to Green transition
     return {
       backgroundColor,
-      borderRadius: 20, // Fixed radius value or you can use height.value / 2 if dynamic
+      borderRadius: 25,
     };
   });
-const thumbStyles = useAnimatedStyle(()=>{
-  const moveValue = interpolate(
-    isOn.value,[0,1],[0,width.value - height.value]
-  )
-  const translateValue =withTiming(moveValue,{duration:400})
-  return{
-    transform:[{translateX:translateValue}],
-    borderRadius:height.value/2
-  }
-})
+
+  // Animated style for the thumb
+  const thumbStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
   return (
-    <Pressable
-      onPress={() => {
-        isOn.value = withTiming(isOn.value === 1 ? 0 : 1, { duration: 400 });
-      }}
-    >
-      <Animated.View style={[styles.switchView, trackAnimatedStyle]}  onLayout={(e) => {
-              height.value = e.nativeEvent.layout.height;
-              width.value = e.nativeEvent.layout.width;
-            }}>
-      <Animated.View
+    <GestureHandlerRootView style={{ height:'auto' }}>
+      <View style={{ width: btnWidth, height: 54, borderRadius: 25, padding: 2 }}>
+        <Animated.View style={[{ width: '100%', height: '100%' }, trackStyle]}>
+          <GestureDetector gesture={gesture}>
+            <Animated.View
               style={[
-                styles.ball,
-                thumbStyles
+                {
+                  height: 50,
+                  width: thumbWidth,
+                  backgroundColor: 'green',
+                  borderRadius: 25,
+                  position: 'absolute',
+                },
+                thumbStyle,
               ]}
             />
-            <Text style={styles.title}>{title}</Text>
-      </Animated.View>
-    </Pressable>
+          </GestureDetector>
+        </Animated.View>
+        
+      </View>
+
+    </GestureHandlerRootView>
   );
 };
 

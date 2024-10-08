@@ -5,3 +5,5 @@ export function multiply(a: number, b: number): Promise<number> {
 export { default as Button } from './components/Button/Button';
 // export  {default as ThemeProvider} from './context/ThemeContext'
 export {default as Slider} from "./components/Slider/Slider"
+
+export {default as Switch} from "./components/Switch/Switch"

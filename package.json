@@ -89,6 +89,7 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
+    "react-native-gesture-handler": "^2.0.0",
     "react-native-reanimated": "^3.15.4"
   },
   "workspaces": [
@@ -184,6 +185,7 @@
     "version": "0.41.2"
   },
   "dependencies": {
-    "expo-linear-gradient": "^13.0.2"
+    "expo-linear-gradient": "^13.0.2",
+    "react-native-gesture-handler": "^2.20.0"
   }
 }

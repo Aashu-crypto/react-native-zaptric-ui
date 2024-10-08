@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Button, multiply, Slider } from 'react-native-zaptric-ui';
+import { Button, multiply, Slider, Switch } from 'react-native-zaptric-ui';
 
 export default function App() {
   const [result, setResult] = useState<number | undefined>();
@@ -20,7 +20,10 @@ export default function App() {
           console.log('Working');
         }}
       />
-     <Slider status={false} title='Online'/>
+        <Slider status={false} title='Online'/>
+      <Switch status={false} title='Offline'/>
+   
+     
     </View>
   );
 }
